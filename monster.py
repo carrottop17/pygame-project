@@ -19,6 +19,7 @@ class Monster(object):
 		# self.moving_down = False
 
 		self.y = self.rect.y
+		self.x = self.rect.x
 		self.speed = game_settings.monster_speed
 
 		# Add update to the hero class to kep all the hero updates in the hero class
@@ -29,11 +30,15 @@ class Monster(object):
 		# 	self.rect.centerx -= 10 #Move the hero to the left
 		# if self.moving_up and self.rect.up > self.screen_rect.up:
 		# 	self.rect.centerx += 10 #Move the hero to the right
-		# elif self.moving_down and self.rect.down > self.screen_rect.down:
-		# 	self.rect.centerx -= 10 #Move the hero to the right
-
+		if self.rect.bottom == self.screen_rect.bottom:
+			self.speed = -2 #Move the hero to the right
+		if self.rect.top == self.screen_rect.top:
+			self.speed = 2 #Move the hero to the right
+			
+		
 		self.y += self.speed #change the y each time update is run, by monster speed
 		self.rect.y = self.y #update rect position
+		self.rect.x = self.x
 
 
 	def draw_me(self):
