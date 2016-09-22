@@ -16,5 +16,12 @@ class Hero(object):
 		self.moving_right = False #setup movement booleans
 		self.moving_left = False
 
+		# Add update to the hero class to kep all the hero updates in the hero class
+	def update(self):
+		if self.moving_right and self.rect.right < self.screen_rect.right:
+			self.rect.centerx += 10 #Move the hero to the right
+		elif self.moving_left and self.rect.left > self.screen_rect.left:
+			self.rect.centerx -= 10 #Move the hero to the right
+
 	def draw_me(self):
 		self.screen.blit(self.image, self.rect)#draw the surface, the image, the where
