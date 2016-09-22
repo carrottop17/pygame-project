@@ -2,6 +2,7 @@ import pygame #the game
 from hero import Hero #bring in the hero class with all its methods
 from settings import Settings
 import game_functions as gf
+from pygame.sprite import Group
 
 
 #set up the main core function
@@ -10,13 +11,14 @@ def run_game():
 	game_settings = Settings()#create an instance of settings class
 	screen = pygame.display.set_mode(game_settings.screen_size) # set the screen size with set_mode
 	pygame.display.set_caption("Monster Attack") #set the message on the status bar
-
 	hero = Hero(screen) #set a variable equal to the class and pass it the screen
+	bullets = Group() #set the bullets to group
 
 	while 1: #runt this loop forever
-		gf.check_events(hero) #call gf (aliased from game_functions module) and get the check_events method
+		gf.check_events(hero, bullets, game_settings, screen) #call gf (aliased from game_functions module) and get the check_events method
 		hero.update() #update the hero flags
-		gf.update_screen(game_settings, screen, hero) # call the update_screen method which updates updating the screen
+		bullets.update() #call the update method in the while loop
+		gf.update_screen(game_settings, screen, hero, bullets) # call the update_screen method which updates updating the screen
 	
 
 run_game() #start the game
