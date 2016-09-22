@@ -25,6 +25,9 @@ def run_game():
 		for bullet in bullets: #get rid of bullets that are off the screen
 			if bullet.rect.bottom <= 0: #bullet bottom is at the top of the screen
 				bullets.remove(bullet)
-				
+			if bullet.rect.top == monster.rect.bottom:
+				bullets.remove(bullet)
+				monster.speed = -2
+
 
 run_game() #start the game
