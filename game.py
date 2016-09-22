@@ -1,27 +1,21 @@
-import sys #we will need the sys so the user can be able to quit
 import pygame #the game
 from hero import Hero #bring in the hero class with all its methods
+from settings import Settings
+import game_functions as gf
 
 
 #set up the main core function
 def run_game():
 	pygame.init() #initialize all the pygame modules
-	screen = pygame.display.set_mode((1000,800)) # set the screen size with set_mode
+	game_settings = Settings()#create an instance of settings class
+	screen = pygame.display.set_mode(game_settings.screen_size) # set the screen size with set_mode
 	pygame.display.set_caption("Monster Attack") #set the message on the status bar
-
-	bg_color = (82,111,53) #green grass color
 
 	hero = Hero(screen) #set a variable equal to the class and pass it the screen
 
 	while 1: #runt this loop forever
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				sys.exit()
-
-		#fill the background with our green
-		screen.fill(bg_color)
-		hero.draw_me() #call the draw method and put the hero on the screen
-		pygame.display.flip()
+		gf.check_events(hero) #call gf (aliased from game_functions module) and get the check_events method
+		gf.update_screen(game_settings, screen, hero) # call the update_screen method which updates updating the screen
 	
 
 run_game() #start the game
