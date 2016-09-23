@@ -7,6 +7,7 @@ from pygame.sprite import Group, groupcollide
 from start_button import Play_button
 
 
+
 #set up the main core function
 def run_game():
 	pygame.init() #initialize all the pygame modules
@@ -14,6 +15,9 @@ def run_game():
 	screen = pygame.display.set_mode(game_settings.screen_size) # set the screen size with set_mode
 	pygame.display.set_caption("Monster Attack") #set the message on the status bar
 	play_button = Play_button(screen, 'Press Play')
+
+	pygame.mixer.music.load('sounds/music.wav')
+	pygame.mixer.music.play(-1)
 	hero = Hero(screen) #set a variable equal to the class and pass it the screen
 	monster = Monster(screen, game_settings)
 	bullets = Group() #set the bullets to group
@@ -25,7 +29,9 @@ def run_game():
 			hero.update() #update the hero flags
 			monster.update()
 			bullets.update() #call the update method in the while loop
-			# groupcollide(enemies, bullets, True, True) -> Sprite_dict
+			# the Dict = groupcollide(enemies, bullets, True, True)
+			# if(theDict):
+			# 	print "you hit the monster. play some type of music"
 			for bullet in bullets: #get rid of bullets that are off the screen
 				if bullet.rect.bottom <= 0: #bullet bottom is at the top of the screen
 					bullets.remove(bullet)
