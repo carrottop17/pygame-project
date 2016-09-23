@@ -8,3 +8,5 @@ class Settings():
 		self.bullet_height = 10
 		self.bullet_color = 0,0,0
 		self.monster_speed = 2
+		self.mans_left = 3
+		self.game_active = False #init the game as not active
